@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Particle Simulation</title>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="js/three.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="fields/field.js"></script>
+  <script src="fields/electricField.js"></script>
+  <script src="particles/particle.js"></script>
+  <script src="particles/electron.js"></script>
+  <script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+    const renderer = new THREE.WebGLRenderer();
+
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    renderer.setSize(width, height);
+    document.body.appendChild(renderer.domElement);
+
+    const electricField = new ElectricField();
+
+    for (let x = 0; x < 5; x++) {
+      const particle = new Electron();
+      electricField.addParticle(particle)
+      scene.add(particle.obj)
+      particle.obj.position.set(x * 100, 0, 0);
+      particle.details();
+    }
+
+    camera.position.z = 1015;
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      electricField.update();
+
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+</body>
+
+</html>
