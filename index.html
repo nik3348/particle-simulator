@@ -18,6 +18,7 @@
   <script src="fields/electricField.js"></script>
   <script src="particles/particle.js"></script>
   <script src="particles/electron.js"></script>
+  <script src="particles/proton.js"></script>
   <script>
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -31,15 +32,24 @@
 
     const electricField = new ElectricField();
 
-    for (let x = 0; x < 5; x++) {
+    for (let x = 0; x < 2; x++) {
       const particle = new Electron();
       electricField.addParticle(particle)
       scene.add(particle.obj)
-      particle.obj.position.set(x * 100, 0, 0);
+      particle.obj.position.set(Math.random()*100, Math.random()*100, 0);
       particle.details();
     }
 
-    camera.position.z = 1015;
+    for (let x = 0; x < 2; x++) {
+      const particle = new Proton();
+      electricField.addParticle(particle)
+      scene.add(particle.obj)
+      particle.obj.position.set(Math.random()*100, 0, 0);
+      particle.details();
+    }
+
+    camera.position.set(0, 0, 1015)
+    camera.lookAt(0, 0, 0)
 
     function animate() {
       requestAnimationFrame(animate);
@@ -52,4 +62,4 @@
   </script>
 </body>
 
-</html>
+</html

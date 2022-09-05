@@ -1,5 +1,7 @@
 class Utils {
   static coulumbsConstant = 8.988e9;
+  static timeConstant = 1e1;
+  static nicksLength = 2;
 
   static distance1D = (p1, p2, d) => {
     const x1 = p1.position[d];
@@ -25,5 +27,4 @@ class Utils {
   static CoulumbsLaw = (q1, q2, r) => {
     return this.coulumbsConstant * (q1 * q2) / (Math.pow(r, 2))
   }
-
 }
